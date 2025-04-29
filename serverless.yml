@@ -8,6 +8,12 @@ service: shortUri
 custom:
   defaultStage: dev
 
+build:
+  esbuild:
+    minify: true
+    bundle: true
+    sourcemap: false
+
 provider:
   name: aws
   region: sa-east-1

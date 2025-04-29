@@ -1,69 +1,81 @@
-<!--
-title: 'AWS Simple HTTP Endpoint example in NodeJS'
-description: 'This template demonstrates how to make a simple HTTP API with Node.js running on AWS Lambda and API Gateway using the Serverless Framework.'
-layout: Doc
-framework: v4
-platform: AWS
-language: nodeJS
-authorLink: 'https://github.com/serverless'
-authorName: 'Serverless, Inc.'
-authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
--->
+# URL Shortener App
 
-# Serverless Framework Node HTTP API on AWS
+Um projeto de estudo para construir um **encurtador de URLs** usando **Serverless**, **AWS** e **TypeScript**.
 
-This template demonstrates how to make a simple HTTP API with Node.js running on AWS Lambda and API Gateway using the Serverless Framework.
+## Sobre o Projeto
 
-This template does not include any kind of persistence (database). For more advanced examples, check out the [serverless/examples repository](https://github.com/serverless/examples/) which includes Typescript, Mongo, DynamoDB and other examples.
+Este projeto é um encurtador de links simples e escalável, utilizando:
+- **Serverless Framework** para infraestrutura como código
+- **AWS Lambda**, **API Gateway**, **DynamoDB** para backend serverless
+- **TypeScript** para desenvolvimento seguro e tipado
 
-## Usage
+O objetivo principal é aprender na prática sobre desenvolvimento de aplicações serverless na nuvem.
 
-### Deployment
+## Tecnologias e Ferramentas
 
-In order to deploy the example, you need to run the following command:
+- [TypeScript](https://www.typescriptlang.org/)
+- [Serverless Framework](https://www.serverless.com/)
+- [AWS Lambda](https://aws.amazon.com/lambda/)
+- [AWS API Gateway](https://aws.amazon.com/api-gateway/)
+- [AWS DynamoDB](https://aws.amazon.com/dynamodb/)
+- [Node.js](https://nodejs.org/)
 
-```
-serverless deploy
-```
+## Como Rodar Localmente
 
-After running deploy, you should see output similar to:
+1. **Clone o repositório**
 
-```
-Deploying "serverless-http-api" to stage "dev" (us-east-1)
-
-✔ Service deployed to stack serverless-http-api-dev (91s)
-
-endpoint: GET - https://xxxxxxxxxx.execute-api.us-east-1.amazonaws.com/
-functions:
-  hello: serverless-http-api-dev-hello (1.6 kB)
+```bash
+git clone https://github.com/seu-usuario/url-shortener-app.git
+cd url-shortener-app
 ```
 
-_Note_: In current form, after deployment, your API is public and can be invoked by anyone. For production deployments, you might want to configure an authorizer. For details on how to do that, refer to [HTTP API (API Gateway V2) event docs](https://www.serverless.com/framework/docs/providers/aws/events/http-api).
+2. **Instale as dependências**
 
-### Invocation
-
-After successful deployment, you can call the created application via HTTP:
-
-```
-curl https://xxxxxxx.execute-api.us-east-1.amazonaws.com/
+```bash
+npm install
 ```
 
-Which should result in response similar to:
+3. **Configure a AWS CLI**
 
-```json
-{ "message": "Go Serverless v4! Your function executed successfully!" }
+Certifique-se de ter a AWS CLI configurada:
+
+```bash
+aws configure
 ```
 
-### Local development
+4. **Deploy localmente (offline)**
 
-The easiest way to develop and test your function is to use the `dev` command:
+Instale o plugin serverless-offline (opcional, para simular API Gateway/Lambda localmente):
 
+```bash
+npm install serverless-offline --save-dev
 ```
-serverless dev
+
+Depois, execute:
+
+```bash
+npx serverless offline
 ```
 
-This will start a local emulator of AWS Lambda and tunnel your requests to and from AWS Lambda, allowing you to interact with your function as if it were running in the cloud.
+5. **Deploy para a AWS**
 
-Now you can invoke the function as before, but this time the function will be executed locally. Now you can develop your function locally, invoke it, and see the results immediately without having to re-deploy.
+```bash
+npx serverless deploy
+```
 
-When you are done developing, don't forget to run `serverless deploy` to deploy the function to the cloud.
+## Aprendizados Esperados
+
+- Criar funções serverless com Lambda
+- Gerenciar rotas HTTP com API Gateway
+- Persistir dados com DynamoDB
+- Deploy automático com Serverless Framework
+- Práticas de boas arquiteturas para projetos serverless
+
+## Licença
+
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+---
+
+**Bora encurtar links de forma serverless! 🚀**
+

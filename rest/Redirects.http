@@ -1,0 +1,6 @@
+@host = https://a9voawsa4f.execute-api.sa-east-1.amazonaws.com
+
+###
+
+### Create Site Rediret
+POST {{host}}/

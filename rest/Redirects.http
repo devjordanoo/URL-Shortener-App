@@ -1,6 +1,12 @@
-@host = https://a9voawsa4f.execute-api.sa-east-1.amazonaws.com
+@hostAWS = https://pmhyq4xtq4.execute-api.sa-east-1.amazonaws.com
+@hostLocal = http://localhost:3000/
 
 ###
 
 ### Create Site Rediret
-POST {{host}}/
+POST {{hostAWS}}/
+Content-Type: application/json
+
+{
+  "originalUrl": "aaaa"
+}

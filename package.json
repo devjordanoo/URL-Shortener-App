@@ -1,6 +1,12 @@
 {
   "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.799.0",
     "@types/aws-lambda": "^8.10.149",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "zod": "^3.24.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.3",
+    "serverless-offline": "^14.4.0"
   }
 }

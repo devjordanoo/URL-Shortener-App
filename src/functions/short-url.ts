@@ -3,10 +3,16 @@ import { APIGatewayProxyEventV2 } from "aws-lambda";
 import { randomUUID } from "node:crypto"
 
 import { ValidateParam } from "../decorators/validateParam";
+import { Inject } from "../decorators/injec";
+
 import { UrlValidation } from "../validations/emailValidation";
 
+import { register } from "../utils/di/container";
+
 const dynamoClient = new DynamoDBClient();
-const _urlValidation = new UrlValidation();
+const urlValidation = new UrlValidation();
+
+register("UrlValidation", urlValidation);
 
 interface ShortedURLBody {
   originalUrl: string;
@@ -16,8 +22,13 @@ interface APIGatewayProxyEventWithBody extends Omit<APIGatewayProxyEventV2, "bod
   body: ShortedURLBody;
 }
 
+@Inject({
+  _urlValidation: "UrlValidation"
+})
 class ShortedURL {
-  @ValidateParam("originalUrl", _urlValidation)
+  private _urlValidation: UrlValidation;
+  
+  @ValidateParam("originalUrl", urlValidation)
   async handler(event: APIGatewayProxyEventWithBody) {
     const body = event.body;
     const id = randomUUID();

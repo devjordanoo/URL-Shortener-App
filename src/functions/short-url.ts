@@ -3,16 +3,16 @@ import { APIGatewayProxyEventV2 } from "aws-lambda";
 import { randomUUID } from "node:crypto"
 
 import { ValidateParam } from "../decorators/validateParam";
-import { Inject } from "../decorators/injec";
+import { Inject, injectDependencies } from "../decorators/injec";
 
 import { UrlValidation } from "../validations/emailValidation";
+import { ShortedUrlRepository } from "../repositories/ShortedUrlRepository";
 
-import { register } from "../utils/di/container";
+import { boostrap, TOKENS } from "../utils/di/bootstrap";
+import { resolve } from "../utils/di/container";
 
-const dynamoClient = new DynamoDBClient();
+boostrap();
 const urlValidation = new UrlValidation();
-
-register("UrlValidation", urlValidation);
 
 interface ShortedURLBody {
   originalUrl: string;
@@ -22,26 +22,20 @@ interface APIGatewayProxyEventWithBody extends Omit<APIGatewayProxyEventV2, "bod
   body: ShortedURLBody;
 }
 
-@Inject({
-  _urlValidation: "UrlValidation"
-})
 class ShortedURL {
-  private _urlValidation: UrlValidation;
-  
+  @Inject(TOKENS.ShortedUrlRepository)
+  public _shortedUrlRepository: ShortedUrlRepository;
+
+  constructor() {
+    injectDependencies(this);
+  }
+
   @ValidateParam("originalUrl", urlValidation)
   async handler(event: APIGatewayProxyEventWithBody) {
     const body = event.body;
     const id = randomUUID();
 
-    const command = new PutItemCommand({
-      TableName: "SitesRedirects",
-      Item: {
-        id: { S: id },
-        originalUrl: { S: body.originalUrl }
-      }
-    });
-
-    await dynamoClient.send(command);
+    await this._shortedUrlRepository.create(id, body);
 
     return {
       statusCode: 200,
@@ -51,4 +45,4 @@ class ShortedURL {
 }
 
 const shortedURL = new ShortedURL();
-export const handler = (event: APIGatewayProxyEventWithBody) => shortedURL.handler(event);
+export const handler = shortedURL.handler.bind(shortedURL);

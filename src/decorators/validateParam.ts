@@ -4,7 +4,7 @@ export function ValidateParam(paramName: string, Validation: ValidationClassCont
   return function (target: Object, propertyKey: string | symbol, descriptor: PropertyDescriptor) {
     const originalMethod = descriptor.value;
 
-    descriptor.value = async (...args: any[]) => {
+    descriptor.value = async function (...args: any[]) {
       const event = args[0];
       let body = {};
 
@@ -19,8 +19,6 @@ export function ValidateParam(paramName: string, Validation: ValidationClassCont
           }),
         };
       }
-      
-      console.log(body)
 
       const value = body[paramName];
       const result = Validation.validate(value);

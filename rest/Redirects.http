@@ -4,9 +4,9 @@
 ###
 
 ### Create Site Rediret
-POST {{hostAWS}}/
+POST {{hostLocal}}/
 Content-Type: application/json
 
 {
-  "originalUrl": "aaaa"
+  "originalUrl": "http://exemplo.com"
 }

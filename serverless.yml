@@ -43,7 +43,7 @@ provider:
 
 functions:
   hello:
-    handler: ${self:custom.functionsPath}/hello.handler
+    handler: ${self:custom.functionsPath}/short-url.handler
     events:
       - httpApi: POST /
 

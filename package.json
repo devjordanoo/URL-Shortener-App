@@ -1,4 +1,9 @@
 {
+  "type": "module",
+  "scripts": {
+    "deploy": "sls deploy",
+    "dev": "sls offline"
+  },
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.799.0",
     "@types/aws-lambda": "^8.10.149",

@@ -1,0 +1,7 @@
+{
+  "compilerOptions": {
+    "experimentalDecorators": true,
+  },
+  "target": "ES2022", // ou ESNext
+  "module": "CommonJS" // ou ESNext
+}

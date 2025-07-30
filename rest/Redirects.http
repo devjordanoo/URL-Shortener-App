@@ -8,5 +8,5 @@ POST {{hostLocal}}/
 Content-Type: application/json
 
 {
-  "originalUrl": "http://exemplo.com"
+  "originalUrl": "https://www.example.com/test-decorator-3"
 }
